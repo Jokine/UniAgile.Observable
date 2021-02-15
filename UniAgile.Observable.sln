@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniAgile.Observable", "UniAgile.Observable\UniAgile.Observable.csproj", "{472B4B7F-DFE4-4C99-BA91-7D3F280CD825}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniAgile.Observable.Tests", "UniAgile.Observable.Tests\UniAgile.Observable.Tests.csproj", "{49C003B0-38B6-489C-A70D-BE0AB223BF4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{472B4B7F-DFE4-4C99-BA91-7D3F280CD825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{472B4B7F-DFE4-4C99-BA91-7D3F280CD825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{472B4B7F-DFE4-4C99-BA91-7D3F280CD825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{472B4B7F-DFE4-4C99-BA91-7D3F280CD825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49C003B0-38B6-489C-A70D-BE0AB223BF4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49C003B0-38B6-489C-A70D-BE0AB223BF4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49C003B0-38B6-489C-A70D-BE0AB223BF4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49C003B0-38B6-489C-A70D-BE0AB223BF4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
