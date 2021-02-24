@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Moq;
 
@@ -14,15 +13,17 @@ namespace UniAgile.Observable.Tests
             {
                 yield return new object[]
                 {
-                    CreateMockArray<T>(1)
+                    CreateMockArray(1)
                 };
+
                 yield return new object[]
                 {
-                    CreateMockArray<T>(5)
+                    CreateMockArray(5)
                 };
+
                 yield return new object[]
                 {
-                    CreateMockArray<T>(10)
+                    CreateMockArray(10)
                 };
             }
 
@@ -31,8 +32,7 @@ namespace UniAgile.Observable.Tests
                 return GetEnumerator();
             }
 
-            private T[] CreateMockArray<T>(int numberOfMocks)
-                where T : class
+            private T[] CreateMockArray(int numberOfMocks)
             {
                 var arr = new T[numberOfMocks];
 
@@ -41,7 +41,7 @@ namespace UniAgile.Observable.Tests
                 return arr;
             }
         }
-        
+
         public class NullFactory<T> : IEnumerable<object[]>
             where T : class
         {
@@ -57,7 +57,6 @@ namespace UniAgile.Observable.Tests
             {
                 return GetEnumerator();
             }
-            
         }
 
 
@@ -68,17 +67,17 @@ namespace UniAgile.Observable.Tests
             {
                 yield return new object[]
                 {
-                    CreateMockArray<T>(1)
+                    CreateMockArray(1)
                 };
 
                 yield return new object[]
                 {
-                    CreateMockArray<T>(5)
+                    CreateMockArray(5)
                 };
-                
+
                 yield return new object[]
                 {
-                    CreateMockArray<T>(10)
+                    CreateMockArray(10)
                 };
             }
 
@@ -87,8 +86,7 @@ namespace UniAgile.Observable.Tests
                 return GetEnumerator();
             }
 
-            private Mock<T>[] CreateMockArray<T>(int numberOfMocks)
-                where T : class
+            private Mock<T>[] CreateMockArray(int numberOfMocks)
             {
                 var arr = new Mock<T>[numberOfMocks];
 

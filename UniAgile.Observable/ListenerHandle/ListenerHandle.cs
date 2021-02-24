@@ -7,8 +7,8 @@ namespace UniAgile.Observable
         public ListenerHandle(IListenableSignal<T1, T2, T3> listenedSignal,
                               Action<T1, T2, T3>            onChange)
         {
-            ListenedSignal = listenedSignal;
-            OnChange       = onChange;
+            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
+            OnChange       = onChange       ?? throw new NullReferenceException();
         }
 
         private readonly IListenableSignal<T1, T2, T3> ListenedSignal;
@@ -44,8 +44,8 @@ namespace UniAgile.Observable
         public ListenerHandle(IListenableSignal<T1, T2> listenedSignal,
                               Action<T1, T2>            onChange)
         {
-            ListenedSignal = listenedSignal;
-            OnChange       = onChange;
+            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
+            OnChange       = onChange       ?? throw new NullReferenceException();
         }
 
         private readonly IListenableSignal<T1, T2> ListenedSignal;
@@ -82,8 +82,8 @@ namespace UniAgile.Observable
         public ListenerHandle(IListenableSignal<T> listenedSignal,
                               Action<T>            onChange)
         {
-            ListenedSignal = listenedSignal;
-            OnChange       = onChange;
+            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
+            OnChange       = onChange       ?? throw new NullReferenceException();
         }
 
         private readonly IListenableSignal<T> ListenedSignal;
@@ -117,8 +117,8 @@ namespace UniAgile.Observable
         public ListenerHandle(IListenableSignal listenedSignal,
                               Action            onChange)
         {
-            ListenedSignal = listenedSignal;
-            OnChange       = onChange;
+            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
+            OnChange       = onChange       ?? throw new NullReferenceException();
         }
 
         private readonly IListenableSignal ListenedSignal;

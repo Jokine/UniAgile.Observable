@@ -10,7 +10,8 @@ namespace UniAgile.Observable
         public void AddListener(Action listener)
         {
             if (listener == null) throw new Exception("Trying to add null listener to a signal");
-                // this is the only consistent way for avoiding duplicates
+
+            // this is the only consistent way for avoiding duplicates
             Event -= listener;
             Event += listener;
         }

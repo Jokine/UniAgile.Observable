@@ -51,8 +51,7 @@ namespace UniAgile.Testing
 
             return self;
         }
-        
-        
+
 
         public static T and_has<TSelf, T>(this TSelf self,
                                           T          param)
@@ -75,7 +74,7 @@ namespace UniAgile.Testing
 
             return param;
         }
-        
+
 
         public static T and<T>(this T param)
         {
@@ -185,14 +184,11 @@ namespace UniAgile.Testing
 
             return param;
         }
-        
+
         public static void Throws<T>(this T[]  array,
                                      Action<T> func)
         {
-            foreach (var elem in array)
-            {
-                Assert.ThrowsAny<Exception>(() => func(elem));
-            }
+            foreach (var elem in array) Assert.ThrowsAny<Exception>(() => func(elem));
         }
     }
 }
