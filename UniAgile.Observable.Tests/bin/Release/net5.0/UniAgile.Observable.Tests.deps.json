@@ -10,7 +10,7 @@
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "16.7.1",
           "UniAgile.Observable": "1.0.0",
-          "UniAgile.Testing": "1.1.1",
+          "UniAgile.Testing": "1.2.0",
           "coverlet.collector": "1.3.0",
           "xunit": "2.4.1",
           "xunit.runner.visualstudio": "2.4.3"
@@ -1135,7 +1135,7 @@
           "System.Xml.ReaderWriter": "4.3.0"
         }
       },
-      "UniAgile.Testing/1.1.1": {
+      "UniAgile.Testing/1.2.0": {
         "dependencies": {
           "Moq": "4.16.0",
           "xunit": "2.4.1"
@@ -1862,12 +1862,12 @@
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
     },
-    "UniAgile.Testing/1.1.1": {
+    "UniAgile.Testing/1.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fpkTQDJd9VkgnZSmJuYLVBNqpAVVCl6KyqWhxixfn2Em9hph2hOTPBUjiLAhZp/BPBMfDzhB1/Ln4wH+Il6OeQ==",
-      "path": "uniagile.testing/1.1.1",
-      "hashPath": "uniagile.testing.1.1.1.nupkg.sha512"
+      "sha512": "sha512-bBJDwejF02RkasJZM/0b+UCnhWkLGxdhZ2uvGBxveiL8wsqEsSmk7sPcI2SawAwRwRc0g1U9vEV+E0OM2D/UoQ==",
+      "path": "uniagile.testing/1.2.0",
+      "hashPath": "uniagile.testing.1.2.0.nupkg.sha512"
     },
     "xunit/2.4.1": {
       "type": "package",

@@ -9,15 +9,17 @@ namespace UniAgile.Observable.Tests.SignalTests
 {
     public class Integration
     {
-        [Theory]
-        [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
-        public void Signal_can_create_listener_handles_for_delegates(Mock<Action>[] delegates)
+        [Fact]
+        public void Signal_can_create_listener_handles_for_delegates()
         {
             var signal = new Signal();
+            var deleg  = new Mock<Action>();
 
-            this.feature_works_given_that(signal.created_listener_handles_for(delegates))
-                .when(signal.is_invoked)
-                .then(delegates.are_not_called);
+            var listenerHandle = signal.CreateListenerHandle(deleg.Object);
+
+            signal.Invoke();
+
+            deleg.is_not_called();
         }
     }
 
@@ -29,91 +31,103 @@ namespace UniAgile.Observable.Tests.SignalTests
         {
             var signal = new Signal();
 
-            this.feature_works_given_that(signal.has(delegates.added_as_listeners)
-                                                .and_then(signal)
-                                                .has(delegates.removed_from_listening))
-                .when(signal.is_invoked)
-                .then(delegates.are_not_called);
+            foreach (var deleg in delegates)
+            {
+                signal.AddListener(deleg.Object);
+            }
+            
+            signal.RemoveAllListeners();
+            
+            delegates.are_not_called();
         }
 
-        [Theory]
-        [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
-        public void Signal_can_not_have_same_listener_twice(Mock<Action>[] delegates)
+        [Fact]
+        public void Signal_can_not_have_same_listener_twice()
         {
             var signal = new Signal();
-
-            this.feature_works_given_that(signal.has(delegates.added_as_listeners)
-                                                .and_then(signal)
-                                                .has(delegates.added_as_listeners))
-                .when(signal.is_invoked)
-                .then(delegates.are_called_once);
+            var listener  = new Mock<Action>();
+            
+            signal.AddListener(listener.Object);
+            signal.AddListener(listener.Object);
+            
+            signal.Invoke();
+            
+            listener.is_called_once();
         }
 
 
-        [Theory]
-        [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
-        public void Signal_can_add_delegates_as_listeners(Mock<Action>[] delegates)
+        [Fact]
+        public void Signal_can_add_delegates_as_listeners()
         {
             var signal = new Signal();
-
-            this.feature_works_given_that(signal.has(delegates.added_as_listeners))
-                .when(signal.is_invoked)
-                .then(delegates.are_called_once);
+            var deleg  = new Mock<Action>();
+            
+            signal.AddListener(deleg.Object);
+            
+            signal.Invoke();
+            
+            deleg.is_called_once();
         }
 
 
-        [Theory]
-        [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
-        public void Signal_can_remove_delegates_from_listening(Mock<Action>[] delegates)
+        [Fact]
+        public void Signal_can_remove_delegates_from_listening()
         {
             var signal = new Signal();
-
-            this.feature_works_given_that(signal
-                                          .has(delegates.added_as_listeners)
-                                          .and_then(signal.removes_all_its_listeners))
-                .when(signal.is_invoked)
-                .then(delegates.are_not_called);
+            var deleg  = new Mock<Action>();
+            
+            signal.AddListener(deleg.Object);
+            signal.RemoveListener(deleg.Object);
+            
+            signal.Invoke();
+            
+            deleg.is_not_called();
         }
 
 
-        [Theory]
-        [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
-        public void Signal_can_be_invoked(Mock<Action>[] delegates)
+        [Fact]
+        public void Signal_can_be_invoked()
         {
             var signal = new Signal();
-
-            this.feature_works_given_that(signal.has(delegates.added_as_listeners))
-                .when(signal.is_invoked)
-                .then(delegates.are_called_once);
+            var deleg  = new Mock<Action>();
+            
+            signal.AddListener(deleg.Object);
+            
+            signal.Invoke();
+            
+            deleg.is_called_once();
         }
 
 
-        [Theory]
-        [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
-        public void Signal_with_parameters_can_add_parameterless_delegates_as_listeners(Mock<Action>[] parameterlessDelegates)
+        [Fact]
+        public void Signal_with_parameters_can_add_parameterless_delegates_as_listeners()
         {
             var parametrizedSignal = new Signal<bool>();
-            var withParameter      = true;
-
-            this.feature_works_given_that(parametrizedSignal.has(parameterlessDelegates.added_as_listeners))
-                .when(parametrizedSignal.is_invoked, withParameter)
-                .then(parameterlessDelegates.are_called_once);
+            var parameter      = true;
+            var deleg              = new Mock<Action>();
+            
+            parametrizedSignal.AddListener(deleg.Object);
+            
+            parametrizedSignal.Invoke(parameter);
+            
+            deleg.is_called_once();
+            
         }
 
 
-        [Theory]
-        [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
-        public void Signal_with_parameters_can_remove_parameterless_listeners(Mock<Action>[] parameterlessDelegates)
+        [Fact]
+        public void Signal_with_parameters_can_remove_parameterless_listeners()
         {
             var parametrizedSignal = new Signal<bool>();
-            var withParameter      = true;
-
-            this.feature_works_given_that(parametrizedSignal
-                                          .has(parameterlessDelegates.added_as_listeners)
-                                          .and_then(parametrizedSignal)
-                                          .has(parameterlessDelegates.removed_from_listening))
-                .when(parametrizedSignal.is_invoked, withParameter)
-                .then(parameterlessDelegates.are_not_called);
+            var parameter          = true;
+            var deleg              = new Mock<Action>();
+            
+            parametrizedSignal.AddListener(deleg.Object);
+            parametrizedSignal.RemoveListener(deleg.Object);
+            
+            parametrizedSignal.Invoke(parameter);
+            
+            deleg.is_not_called();
         }
     }
 }
