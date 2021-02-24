@@ -1,89 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UniAgile.Observable
 {
-    public class ListenerHandle<T1, T2, T3> : IListenerHandle
-    {
-        public ListenerHandle(IListenableSignal<T1, T2, T3> listenedSignal,
-                              Action<T1, T2, T3>            onChange)
-        {
-            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
-            OnChange       = onChange       ?? throw new NullReferenceException();
-        }
-
-        private readonly IListenableSignal<T1, T2, T3> ListenedSignal;
-        private readonly Action<T1, T2, T3>            OnChange;
-
-        public void Dispose()
-        {
-            Unsubscribe();
-            GC.SuppressFinalize(this);
-        }
-
-        public void Subscribe()
-        {
-            if (IsSubscribed) return;
-
-            ListenedSignal.AddListener(OnChange);
-            IsSubscribed = true;
-        }
-
-        public void Unsubscribe()
-        {
-            if (!IsSubscribed) return;
-
-            ListenedSignal.RemoveListener(OnChange);
-            IsSubscribed = false;
-        }
-
-        public bool IsSubscribed { get; private set; }
-    }
-
-    public class ListenerHandle<T1, T2> : IListenerHandle
-    {
-        public ListenerHandle(IListenableSignal<T1, T2> listenedSignal,
-                              Action<T1, T2>            onChange)
-        {
-            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
-            OnChange       = onChange       ?? throw new NullReferenceException();
-        }
-
-        private readonly IListenableSignal<T1, T2> ListenedSignal;
-        private readonly Action<T1, T2>            OnChange;
-
-        public void Dispose()
-        {
-            Unsubscribe();
-            GC.SuppressFinalize(this);
-        }
-
-        public void Subscribe()
-        {
-            if (IsSubscribed) return;
-
-            ListenedSignal.AddListener(OnChange);
-            IsSubscribed = true;
-        }
-
-
-        public void Unsubscribe()
-        {
-            if (!IsSubscribed) return;
-
-            ListenedSignal.RemoveListener(OnChange);
-            IsSubscribed = false;
-        }
-
-        public bool IsSubscribed { get; private set; }
-    }
-
     public class ListenerHandle<T> : IListenerHandle
     {
         public ListenerHandle(IListenableSignal<T> listenedSignal,
                               Action<T>            onChange)
         {
-            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
-            OnChange       = onChange       ?? throw new NullReferenceException();
+            ListenedSignal = listenedSignal;
+            OnChange       = onChange;
         }
 
         private readonly IListenableSignal<T> ListenedSignal;
@@ -103,8 +29,6 @@ namespace UniAgile.Observable
 
         public void Unsubscribe()
         {
-            if (!IsSubscribed) return;
-
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -112,13 +36,54 @@ namespace UniAgile.Observable
         public bool IsSubscribed { get; private set; }
     }
 
+    public class KvpListenerHandle<T> : IListenerHandle
+    {
+        public KvpListenerHandle(IListenableSignal<T>            listenedSignal,
+                                 string                          key,
+                                 Action<KeyValuePair<string, T>> onChange)
+        {
+            ListenedSignal = listenedSignal;
+            Key            = key;
+            OnChange       = onChange;
+        }
+
+        private readonly string                          Key;
+        private readonly IListenableSignal<T>            ListenedSignal;
+        private readonly Action<KeyValuePair<string, T>> OnChange;
+
+        public void Dispose()
+        {
+            Unsubscribe();
+            GC.SuppressFinalize(this);
+        }
+
+        public void Subscribe()
+        {
+            ListenedSignal.AddListener(InternalOnChanged);
+            IsSubscribed = true;
+        }
+
+        public void Unsubscribe()
+        {
+            ListenedSignal.RemoveListener(InternalOnChanged);
+            IsSubscribed = false;
+        }
+
+        public bool IsSubscribed { get; private set; }
+
+        private void InternalOnChanged(T val)
+        {
+            OnChange(new KeyValuePair<string, T>(Key, val));
+        }
+    }
+
     public class ListenerHandle : IListenerHandle
     {
         public ListenerHandle(IListenableSignal listenedSignal,
                               Action            onChange)
         {
-            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
-            OnChange       = onChange       ?? throw new NullReferenceException();
+            ListenedSignal = listenedSignal;
+            OnChange       = onChange;
         }
 
         private readonly IListenableSignal ListenedSignal;
@@ -132,16 +97,12 @@ namespace UniAgile.Observable
 
         public void Subscribe()
         {
-            if (IsSubscribed) return;
-
             ListenedSignal.AddListener(OnChange);
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
-            if (!IsSubscribed) return;
-
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -169,16 +130,12 @@ namespace UniAgile.Observable
 
         public void Subscribe()
         {
-            if (IsSubscribed) return;
-
             Add();
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
-            if (!IsSubscribed) return;
-
             Remove();
             IsSubscribed = false;
         }

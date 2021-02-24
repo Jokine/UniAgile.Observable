@@ -1,6 +1,6 @@
 ﻿namespace UniAgile.Observable
 {
-    public struct CollectionChangeInfo<T>
+    public readonly struct CollectionChangeInfo<T>
     {
         public CollectionChangeInfo(T                    target,
                                     CollectionChangeType collectionChangeType)
