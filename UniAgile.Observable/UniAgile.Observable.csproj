@@ -2,6 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <Title>UniAgile.Observable</Title>
+        <PackageProjectUrl>https://github.com/Jokine/UniAgile.Observable</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Jokine/UniAgile.Observable</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
     </PropertyGroup>
 
 </Project>
