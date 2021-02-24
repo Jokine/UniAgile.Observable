@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Moq;
+using UniAgile.Testing;
 using Xunit;
 
 namespace UniAgile.Observable.Tests.ListenerHandleTests
@@ -12,7 +13,7 @@ namespace UniAgile.Observable.Tests.ListenerHandleTests
                         .ToArray();
         
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Listener_handle_can_subscribe_to_a_signal_without_publicly_referring_to_it(Mock<Action>[] delegates)
         {
             var signal = new Signal();
@@ -27,7 +28,7 @@ namespace UniAgile.Observable.Tests.ListenerHandleTests
 
 
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Listener_handle_can_unsubscribe_from_a_signal_without_publicly_referring_to_it(Mock<Action>[] delegates)
         {
             var signal = new Signal();
@@ -40,7 +41,7 @@ namespace UniAgile.Observable.Tests.ListenerHandleTests
         }
         
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         
         public void Listener_handle_can_be_created_without_listening_to_the_signal(Mock<Action>[] delegates)
         {

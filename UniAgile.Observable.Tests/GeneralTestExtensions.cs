@@ -2,7 +2,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace UniAgile.Observable.Tests
+namespace UniAgile.Testing
 {
     public static class GeneralTestExtensions
     {

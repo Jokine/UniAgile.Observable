@@ -5,9 +5,9 @@ using Moq;
 
 namespace UniAgile.Observable.Tests
 {
-    public static class Extensions
+    public static class DataGeneration
     {
-        public class MockListenerFactory : IEnumerable<object[]>
+        public class MockDelegateFactory : IEnumerable<object[]>
         {
             public IEnumerator<object[]> GetEnumerator()
             {

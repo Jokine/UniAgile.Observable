@@ -2,7 +2,7 @@
 using Moq;
 using UniAgile.Testing;
 
-namespace UniAgile.Observable.Tests
+namespace UniAgile.Testing
 {
     public static class DelegateTestExtensions
     {

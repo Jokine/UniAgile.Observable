@@ -1,5 +1,6 @@
 ﻿using System;
 using Moq;
+using UniAgile.Testing;
 using Xunit;
 
 // ReSharper disable ClassNeverInstantiated.Global
@@ -9,7 +10,7 @@ namespace UniAgile.Observable.Tests.SignalTests
     public class Integration
     {
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Signal_can_create_listener_handles_for_delegates(Mock<Action>[] delegates)
         {
             var signal = new Signal();
@@ -23,7 +24,7 @@ namespace UniAgile.Observable.Tests.SignalTests
     public class Unit
     {
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Signal_can_remove_all_its_listeners(Mock<Action>[] delegates)
         {
             var signal = new Signal();
@@ -37,7 +38,7 @@ namespace UniAgile.Observable.Tests.SignalTests
 
 
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Signal_can_add_delegates_as_listeners(Mock<Action>[] delegates)
         {
             var signal = new Signal();
@@ -49,7 +50,7 @@ namespace UniAgile.Observable.Tests.SignalTests
 
 
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Signal_can_remove_delegates_from_listening(Mock<Action>[] delegates)
         {
             var signal = new Signal();
@@ -63,7 +64,7 @@ namespace UniAgile.Observable.Tests.SignalTests
 
 
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Signal_can_be_invoked(Mock<Action>[] delegates)
         {
             var signal = new Signal();
@@ -75,7 +76,7 @@ namespace UniAgile.Observable.Tests.SignalTests
 
 
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Signal_with_parameters_can_add_parameterless_delegates_as_listeners(Mock<Action>[] parameterlessDelegates)
         {
             var parametrizedSignal = new Signal<bool>();
@@ -88,7 +89,7 @@ namespace UniAgile.Observable.Tests.SignalTests
 
 
         [Theory]
-        [ClassData(typeof(Extensions.MockListenerFactory))]
+        [ClassData(typeof(DataGeneration.MockDelegateFactory))]
         public void Signal_with_parameters_can_remove_parameterless_listeners(Mock<Action>[] parameterlessDelegates)
         {
             var parametrizedSignal = new Signal<bool>();
