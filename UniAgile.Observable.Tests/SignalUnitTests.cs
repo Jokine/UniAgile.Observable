@@ -14,9 +14,9 @@ namespace UniAgile.Observable.Tests.SignalTests
         {
             var signal = new Signal();
 
-            this.feature_works_given_that(delegates.are_not_called)
+            this.feature_works_given_that(signal.created_listener_handles_for(delegates))
                 .when(signal.is_invoked)
-                .given_that(signal.created_listener_handles_for(delegates));
+                .then(delegates.are_not_called);
         }
     }
 
@@ -28,12 +28,11 @@ namespace UniAgile.Observable.Tests.SignalTests
         {
             var signal = new Signal();
 
-            this.feature_works_given_that(delegates.are_not_called)
+            this.feature_works_given_that(signal.has(delegates.added_as_listeners)
+                                                .and_then(signal)
+                                                .has(delegates.removed_from_listening))
                 .when(signal.is_invoked)
-                .given_that(
-                            signal.has(delegates.added_as_listeners)
-                                  .and_then(signal)
-                                  .has(delegates.removed_from_listening));
+                .then(delegates.are_not_called);
         }
 
 

@@ -1,5 +1,7 @@
 ﻿using System;
 
+// ReSharper disable InconsistentNaming
+
 namespace UniAgile.Observable.Tests
 {
     public static class GeneralTestExtensions
@@ -135,25 +137,23 @@ namespace UniAgile.Observable.Tests
 
             return self;
         }
+        
+        public static T feature_works_given<TSelf, T>(this TSelf self,
+                                                           T          param)
+        {
+            return param;
+        }
 
-
-        public static T given_that<T>(this T param,
-                                      Action action)
+        public static T feature_works_given<T>(this T param,
+                                                    Action action)
         {
             action();
 
             return param;
         }
 
-
-        public static T given_that<TSelf, T>(this TSelf self,
-                                             T          param)
-        {
-            return param;
-        }
-
-        public static T given_that<T>(this T    param,
-                                      Action<T> action)
+        public static T feature_works_given<T>(this T    param,
+                                                    Action<T> action)
         {
             action(param);
 

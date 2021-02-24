@@ -8,30 +8,23 @@ namespace UniAgile.Observable.Tests
 {
     public static class KeyWords
     {
-        public static IListenerHandle[] unsubscribed_them(this IListenerHandle[] handles)
+        public static IListenerHandle[] are_unsubscribed(this IListenerHandle[] handles)
         {
             foreach (var handle in handles) handle.Unsubscribe();
 
             return handles;
         }
 
-        public static IListenerHandle[] subscribed_them(this IListenerHandle[] handles)
+        public static IListenerHandle[] are_subscribed(this IListenerHandle[] handles)
         {
             foreach (var handle in handles) handle.Subscribe();
 
             return handles;
         }
-
-
+        
+        
         public static IListenerHandle[] created_listener_handles_for(this Signal    signal,
                                                                      Mock<Action>[] delegateMocks)
-        {
-            return delegateMocks.Select(d => signal.CreateListenerHandle(d.Object))
-                                .ToArray();
-        }
-
-        public static IListenerHandle[] can_create_listener_handles_to_a(this Mock<Action>[] delegateMocks,
-                                                                         Signal              signal)
         {
             return delegateMocks.Select(d => signal.CreateListenerHandle(d.Object))
                                 .ToArray();
@@ -65,17 +58,7 @@ namespace UniAgile.Observable.Tests
         {
             foreach (var delegateMock in delegateMocks) signal.AddListener(delegateMock.Object);
         }
-
-
-        public static Signal removed_from_listening_to_a(this Mock<Action>[] delegateMocks,
-                                                         Signal              signal)
-        {
-            foreach (var delegateMock in delegateMocks) signal.RemoveListener(delegateMock.Object);
-
-            return signal;
-        }
-
-
+        
         public static void is_invoked(this Signal signal)
         {
             signal.Invoke();
@@ -86,8 +69,5 @@ namespace UniAgile.Observable.Tests
         {
             signal.Invoke(param);
         }
-
-
-
     }
 }
