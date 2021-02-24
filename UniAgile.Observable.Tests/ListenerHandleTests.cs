@@ -4,40 +4,33 @@ using Xunit;
 
 namespace UniAgile.Observable.Tests.ListenerHandleTests
 {
-    namespace Unit
+    public class Unit
     {
-        public class Delegates_can_be_subscribed_to_a_signal_without_refering_to_it
+        [Theory]
+        [ClassData(typeof(Extensions.MockListenerFactory))]
+        public void Listener_handle_can_subscribe_to_a_signal_without_publicly_referring_to_it(Mock<Action>[] delegates)
         {
-            [Theory]
-            [ClassData(typeof(Extensions.MockListenerFactory))]
-            public void when_signal_is_invoked_then_delegates_are_called(Mock<Action>[] delegates)
-            {
-                var signal = new Signal();
+            var signal = new Signal();
 
-                // delegates.can_create_listener_handles_to_a(signal)
-                //          .And()
-                //          .subscribe_them()
-                //          .And_when(signal.is_invoked)
-                //          .Then(delegates.are_called);
-            }
+            this.feature_works_given_that(signal.created_listener_handles_for(delegates)
+                                                .and_then()
+                                                .unsubscribed_them())
+                .when(signal.is_invoked)
+                .then(delegates.are_called);
         }
 
-        public class Delegates_can_be_unsubscribed_from_a_signal_without_refering_to_it
-        {
-            [Theory]
-            [ClassData(typeof(Extensions.MockListenerFactory))]
-            public void when_signal_is_invoked_then_delegates_are_not_called(Mock<Action>[] delegates)
-            {
-                var signal = new Signal();
 
-                // delegates.can_create_listener_handles_to_a(signal)
-                //          .And()
-                //          .subscribe_them()
-                //          .And()
-                //          .unsubscribe_them()
-                //          .When(signal.is_invoked)
-                //          .Then(delegates.are_called);
-            }
+        [Theory]
+        [ClassData(typeof(Extensions.MockListenerFactory))]
+        public void Listener_handle_can_unsubscribe_from_a_signal_without_publicly_referring_to_it(Mock<Action>[] delegates)
+        {
+            var signal = new Signal();
+
+            this.feature_works_given_that(signal.created_listener_handles_for(delegates)
+                                                .and_then()
+                                                .unsubscribed_them())
+                .when(signal.is_invoked)
+                .then(delegates.are_not_called);
         }
     }
 

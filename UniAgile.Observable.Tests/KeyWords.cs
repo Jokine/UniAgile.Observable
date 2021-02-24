@@ -1,200 +1,21 @@
 ﻿using System;
 using System.Linq;
 using Moq;
-using UniAgile.Testing;
 
 // ReSharper disable InconsistentNaming
 
 namespace UniAgile.Observable.Tests
 {
-    public static class TestExtensions
-    {
-        public static T then_it<T>(this T param)
-        {
-            return param;
-        }
-
-        public static T then_the<TSelf, T>(this TSelf self,
-                                           T          param)
-        {
-            return param;
-        }
-
-        public static T but_then<TSelf, T>(this TSelf self,
-                                           T          param)
-        {
-            return param;
-        }
-
-        public static T and_then<TSelf, T>(this TSelf self,
-                                           T          param)
-        {
-            return param;
-        }
-
-        public static TSelf and_then<TSelf>(this TSelf self,
-                                            Action     action)
-        {
-            action();
-
-            return self;
-        }
-
-        public static TSelf and_then<TSelf, T>(this TSelf self,
-                                               Action<T>  action,
-                                               T          param)
-        {
-            action(param);
-
-            return self;
-        }
-
-        public static T and_has<TSelf, T>(this TSelf self,
-                                          T          param)
-        {
-            return param;
-        }
-
-        public static T has<T>(this T param,
-                               Action action)
-        {
-            action();
-
-            return param;
-        }
-
-        public static T has<T>(this T    param,
-                               Action<T> action)
-        {
-            action(param);
-
-            return param;
-        }
-
-        public static T and<T>(this T param)
-        {
-            return param;
-        }
-
-        public static T are<T>(this T param)
-        {
-            return param;
-        }
-
-        public static T will<T>(this T param)
-        {
-            return param;
-        }
-
-        public static T when<T>(this T param,
-                                Action action)
-        {
-            action();
-
-            return param;
-        }
-
-        public static T when<T>(this T    param,
-                                Action<T> action)
-        {
-            action(param);
-
-            return param;
-        }
-
-        public static TSelf when<TSelf, T>(this TSelf self,
-                                           Action<T>  action,
-                                           T          param)
-        {
-            action(param);
-
-            return self;
-        }
-        
-        public static T then<T>(this T param,
-                                Action action)
-        {
-            action();
-
-            return param;
-        }
-
-        public static T then<T>(this T    param,
-                                Action<T> action)
-        {
-            action(param);
-
-            return param;
-        }
-
-        public static TSelf then<TSelf, T>(this TSelf self,
-                                           Action<T>  action,
-                                           T          param)
-        {
-            action(param);
-
-            return self;
-        }
-        
-        
-
-        public static T given_that<T>(this T param,
-                                      Action action)
-        {
-            action();
-
-            return param;
-        }
-        
-
-        public static T given_that<TSelf, T>(this TSelf self,
-                                             T          param)
-        {
-            return param;
-        }
-
-        public static T given_that<T>(this T    param,
-                                      Action<T> action)
-        {
-            action(param);
-
-            return param;
-        }
-
-        public static T feature_works_given_that<TSelf, T>(this TSelf self,
-                                                      T          param)
-        {
-            return param;
-        }
-
-        public static T feature_works_given_that<T>(this T param,
-                                                 Action action)
-        {
-            action();
-
-            return param;
-        }
-
-        public static T feature_works_given_that<T>(this T    param,
-                                               Action<T> action)
-        {
-            action(param);
-
-            return param;
-        }
-    }
-
-
     public static class KeyWords
     {
-        public static IListenerHandle[] unsubscribe_them(this IListenerHandle[] handles)
+        public static IListenerHandle[] unsubscribed_them(this IListenerHandle[] handles)
         {
             foreach (var handle in handles) handle.Unsubscribe();
 
             return handles;
         }
 
-        public static IListenerHandle[] subscribe_them(this IListenerHandle[] handles)
+        public static IListenerHandle[] subscribed_them(this IListenerHandle[] handles)
         {
             foreach (var handle in handles) handle.Subscribe();
 
@@ -267,24 +88,6 @@ namespace UniAgile.Observable.Tests
         }
 
 
-        private static void called(this Mock<Action> delegateMock)
-        {
-            delegateMock.Verify(listener => listener.Invoke(), Times.Exactly(1));
-        }
 
-        public static void are_called(this Mock<Action>[] delegateMock)
-        {
-            delegateMock.Are(called);
-        }
-
-        public static void not_called(this Mock<Action> delegateMock)
-        {
-            delegateMock.Verify(listener => listener.Invoke(), Times.Exactly(0));
-        }
-
-        public static void are_not_called(this Mock<Action>[] delegateMocks)
-        {
-            foreach (var delegateMock in delegateMocks) delegateMock.not_called();
-        }
     }
 }
