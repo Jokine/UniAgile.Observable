@@ -21,8 +21,8 @@ namespace UniAgile.Observable.Tests
 
             return handles;
         }
-        
-        
+
+
         public static IListenerHandle[] created_listener_handles_for(this Signal    signal,
                                                                      Mock<Action>[] delegateMocks)
         {
@@ -58,7 +58,7 @@ namespace UniAgile.Observable.Tests
         {
             foreach (var delegateMock in delegateMocks) signal.AddListener(delegateMock.Object);
         }
-        
+
         public static void is_invoked(this Signal signal)
         {
             signal.Invoke();

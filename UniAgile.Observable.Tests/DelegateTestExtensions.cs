@@ -1,6 +1,5 @@
 ﻿using System;
 using Moq;
-using UniAgile.Testing;
 
 namespace UniAgile.Testing
 {
@@ -11,7 +10,7 @@ namespace UniAgile.Testing
             delegateMock.Verify(listener => listener.Invoke(), Times.Exactly(1), "Delegate was not called. It was expected to be called");
         }
 
-        public static void are_called(this Mock<Action>[] delegateMock)
+        public static void are_called_once(this Mock<Action>[] delegateMock)
         {
             delegateMock.Are(called);
         }

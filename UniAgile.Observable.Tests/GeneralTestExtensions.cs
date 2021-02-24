@@ -1,4 +1,5 @@
 ﻿using System;
+using Xunit;
 
 // ReSharper disable InconsistentNaming
 
@@ -50,6 +51,8 @@ namespace UniAgile.Testing
 
             return self;
         }
+        
+        
 
         public static T and_has<TSelf, T>(this TSelf self,
                                           T          param)
@@ -72,6 +75,7 @@ namespace UniAgile.Testing
 
             return param;
         }
+        
 
         public static T and<T>(this T param)
         {
@@ -137,15 +141,15 @@ namespace UniAgile.Testing
 
             return self;
         }
-        
+
         public static T feature_works_given<TSelf, T>(this TSelf self,
-                                                           T          param)
+                                                      T          param)
         {
             return param;
         }
 
         public static T feature_works_given<T>(this T param,
-                                                    Action action)
+                                               Action action)
         {
             action();
 
@@ -153,7 +157,7 @@ namespace UniAgile.Testing
         }
 
         public static T feature_works_given<T>(this T    param,
-                                                    Action<T> action)
+                                               Action<T> action)
         {
             action(param);
 
@@ -180,6 +184,15 @@ namespace UniAgile.Testing
             action(param);
 
             return param;
+        }
+        
+        public static void Throws<T>(this T[]  array,
+                                     Action<T> func)
+        {
+            foreach (var elem in array)
+            {
+                Assert.ThrowsAny<Exception>(() => func(elem));
+            }
         }
     }
 }
