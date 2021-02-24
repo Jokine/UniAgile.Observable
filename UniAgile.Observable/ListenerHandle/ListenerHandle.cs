@@ -16,18 +16,22 @@ namespace UniAgile.Observable
 
         public void Dispose()
         {
-            this.SafeUnsubscribe();
+            Unsubscribe();
             GC.SuppressFinalize(this);
         }
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             ListenedSignal.AddListener(OnChange);
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -49,18 +53,23 @@ namespace UniAgile.Observable
 
         public void Dispose()
         {
-            this.SafeUnsubscribe();
+            Unsubscribe();
             GC.SuppressFinalize(this);
         }
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             ListenedSignal.AddListener(OnChange);
             IsSubscribed = true;
         }
 
+
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -82,7 +91,7 @@ namespace UniAgile.Observable
 
         public void Dispose()
         {
-            this.SafeUnsubscribe();
+            Unsubscribe();
             GC.SuppressFinalize(this);
         }
 
@@ -94,6 +103,8 @@ namespace UniAgile.Observable
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -115,18 +126,22 @@ namespace UniAgile.Observable
 
         public void Dispose()
         {
-            this.SafeUnsubscribe();
+            Unsubscribe();
             GC.SuppressFinalize(this);
         }
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             ListenedSignal.AddListener(OnChange);
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -148,18 +163,22 @@ namespace UniAgile.Observable
 
         public void Dispose()
         {
-            this.SafeUnsubscribe();
+            Unsubscribe();
             GC.SuppressFinalize(this);
         }
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             Add();
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             Remove();
             IsSubscribed = false;
         }

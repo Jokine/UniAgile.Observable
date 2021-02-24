@@ -27,15 +27,5 @@ namespace UniAgile.Observable
         {
             return new ListenerHandle<T1, T2, T3>(signal, callback);
         }
-
-        public static void SafeSubscribe(this IListenerHandle handle)
-        {
-            if (!handle.IsSubscribed) handle.Subscribe();
-        }
-
-        public static void SafeUnsubscribe(this IListenerHandle handle)
-        {
-            if (handle.IsSubscribed) handle.Unsubscribe();
-        }
     }
 }

@@ -32,7 +32,7 @@ namespace UniAgile.Observable
 
         public void Dispose()
         {
-            this.SafeUnsubscribe();
+            Unsubscribe();
             DeferredSignal.RemoveListener(OnDeferredSignal);
             GC.SuppressFinalize(this);
         }
