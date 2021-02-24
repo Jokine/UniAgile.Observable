@@ -35,7 +35,7 @@ namespace UniAgile.Observable.Tests.SignalTests
                 .when(signal.is_invoked)
                 .then(delegates.are_not_called);
         }
-        
+
         [Theory]
         [ClassData(typeof(GenericDataGeneration.MockArrayFactory<Action>))]
         public void Signal_can_not_have_same_listener_twice(Mock<Action>[] delegates)

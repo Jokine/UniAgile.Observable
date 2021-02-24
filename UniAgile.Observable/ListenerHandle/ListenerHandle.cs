@@ -8,8 +8,8 @@ namespace UniAgile.Observable
         public ListenerHandle(IListenableSignal<T> listenedSignal,
                               Action<T>            onChange)
         {
-            ListenedSignal = listenedSignal;
-            OnChange       = onChange;
+            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
+            OnChange       = onChange       ?? throw new NullReferenceException();
         }
 
         private readonly IListenableSignal<T> ListenedSignal;
@@ -23,12 +23,16 @@ namespace UniAgile.Observable
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             ListenedSignal.AddListener(OnChange);
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -42,9 +46,9 @@ namespace UniAgile.Observable
                                  string                          key,
                                  Action<KeyValuePair<string, T>> onChange)
         {
-            ListenedSignal = listenedSignal;
-            Key            = key;
-            OnChange       = onChange;
+            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
+            Key            = key            ?? throw new NullReferenceException();
+            OnChange       = onChange       ?? throw new NullReferenceException();
         }
 
         private readonly string                          Key;
@@ -59,12 +63,16 @@ namespace UniAgile.Observable
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             ListenedSignal.AddListener(InternalOnChanged);
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             ListenedSignal.RemoveListener(InternalOnChanged);
             IsSubscribed = false;
         }
@@ -82,8 +90,8 @@ namespace UniAgile.Observable
         public ListenerHandle(IListenableSignal listenedSignal,
                               Action            onChange)
         {
-            ListenedSignal = listenedSignal;
-            OnChange       = onChange;
+            ListenedSignal = listenedSignal ?? throw new NullReferenceException();
+            OnChange       = onChange       ?? throw new NullReferenceException();
         }
 
         private readonly IListenableSignal ListenedSignal;
@@ -97,12 +105,16 @@ namespace UniAgile.Observable
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             ListenedSignal.AddListener(OnChange);
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             ListenedSignal.RemoveListener(OnChange);
             IsSubscribed = false;
         }
@@ -115,8 +127,8 @@ namespace UniAgile.Observable
         public ClosureListenerHandle(Action add,
                                      Action remove)
         {
-            Add    = add;
-            Remove = remove;
+            Add    = add    ?? throw new NullReferenceException();
+            Remove = remove ?? throw new NullReferenceException();
         }
 
         private readonly Action Add;
@@ -130,12 +142,16 @@ namespace UniAgile.Observable
 
         public void Subscribe()
         {
+            if (IsSubscribed) return;
+
             Add();
             IsSubscribed = true;
         }
 
         public void Unsubscribe()
         {
+            if (!IsSubscribed) return;
+
             Remove();
             IsSubscribed = false;
         }
