@@ -31,27 +31,24 @@ namespace UniAgile.Observable.Tests.SignalTests
         {
             var signal = new Signal();
 
-            foreach (var deleg in delegates)
-            {
-                signal.AddListener(deleg.Object);
-            }
-            
+            foreach (var deleg in delegates) signal.AddListener(deleg.Object);
+
             signal.RemoveAllListeners();
-            
+
             delegates.are_not_called();
         }
 
         [Fact]
         public void Signal_can_not_have_same_listener_twice()
         {
-            var signal = new Signal();
-            var listener  = new Mock<Action>();
-            
+            var signal   = new Signal();
+            var listener = new Mock<Action>();
+
             signal.AddListener(listener.Object);
             signal.AddListener(listener.Object);
-            
+
             signal.Invoke();
-            
+
             listener.is_called_once();
         }
 
@@ -61,11 +58,11 @@ namespace UniAgile.Observable.Tests.SignalTests
         {
             var signal = new Signal();
             var deleg  = new Mock<Action>();
-            
+
             signal.AddListener(deleg.Object);
-            
+
             signal.Invoke();
-            
+
             deleg.is_called_once();
         }
 
@@ -75,12 +72,12 @@ namespace UniAgile.Observable.Tests.SignalTests
         {
             var signal = new Signal();
             var deleg  = new Mock<Action>();
-            
+
             signal.AddListener(deleg.Object);
             signal.RemoveListener(deleg.Object);
-            
+
             signal.Invoke();
-            
+
             deleg.is_not_called();
         }
 
@@ -90,11 +87,11 @@ namespace UniAgile.Observable.Tests.SignalTests
         {
             var signal = new Signal();
             var deleg  = new Mock<Action>();
-            
+
             signal.AddListener(deleg.Object);
-            
+
             signal.Invoke();
-            
+
             deleg.is_called_once();
         }
 
@@ -103,15 +100,14 @@ namespace UniAgile.Observable.Tests.SignalTests
         public void Signal_with_parameters_can_add_parameterless_delegates_as_listeners()
         {
             var parametrizedSignal = new Signal<bool>();
-            var parameter      = true;
+            var parameter          = true;
             var deleg              = new Mock<Action>();
-            
+
             parametrizedSignal.AddListener(deleg.Object);
-            
+
             parametrizedSignal.Invoke(parameter);
-            
+
             deleg.is_called_once();
-            
         }
 
 
@@ -121,12 +117,12 @@ namespace UniAgile.Observable.Tests.SignalTests
             var parametrizedSignal = new Signal<bool>();
             var parameter          = true;
             var deleg              = new Mock<Action>();
-            
+
             parametrizedSignal.AddListener(deleg.Object);
             parametrizedSignal.RemoveListener(deleg.Object);
-            
+
             parametrizedSignal.Invoke(parameter);
-            
+
             deleg.is_not_called();
         }
     }

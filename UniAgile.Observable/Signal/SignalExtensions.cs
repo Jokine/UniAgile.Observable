@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using UniAgile.Observable.ObservableCollection;
 
 namespace UniAgile.Observable
 {
@@ -14,6 +17,14 @@ namespace UniAgile.Observable
                                                               Action<T>                 callback)
         {
             return new ListenerHandle<T>(signal, callback);
+        }
+        
+        public static IListenerHandle CreateListenerHandle<T>(this INotifyCollectionChanged notifyCollectionChanged,
+                                                              Action<T>         onChange)
+            where T : struct
+        {
+
+            return new CollectionChangedListenerHandle<T>(notifyCollectionChanged, onChange);
         }
     }
 }
