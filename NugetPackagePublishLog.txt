@@ -1,0 +1,5 @@
+Found 1 package.
+[UniAgile.Observable.1.1.2.nupkg]: Repository url: https://github.com/Jokine/UniAgile.Observable. Version: 1.1.2. Size: 6157 bytes. 
+[UniAgile.Observable.1.1.2.nupkg]: Uploading package.
+[UniAgile.Observable.1.1.2.nupkg]: Successfully registered nuget package: UniAgile.Observable (1.1.2)
+

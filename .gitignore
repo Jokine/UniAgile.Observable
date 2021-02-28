@@ -22,6 +22,7 @@ ExportedObj/
 *.pdb
 *.opendb
 *.nupkg
+*.nupkg.meta
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -45,3 +46,4 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 *.zip
+*[Ll]og.txt
