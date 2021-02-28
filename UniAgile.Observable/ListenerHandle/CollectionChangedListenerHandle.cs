@@ -46,7 +46,7 @@ namespace UniAgile.Observable.ObservableCollection
         {
             try
             {
-                OnChange((T) sender);
+                OnChange((T)sender);
             }
             catch (Exception e)
             {
