@@ -14,7 +14,6 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Unity' ">
       <OutputPath>bin\Unity\UniAgile.Observable.UnityPackage\Assets</OutputPath>
-        <PostBuildEvent>call "$(SolutionDir)\UnityPackagePublish.sh"</PostBuildEvent>
       <Optimize>true</Optimize>
     </PropertyGroup>
 
