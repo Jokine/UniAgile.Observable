@@ -10,6 +10,7 @@
         <PackageReleaseNotes>Notify collection changed</PackageReleaseNotes>
         <Configurations>Debug;Release;Unity</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Unity' ">
